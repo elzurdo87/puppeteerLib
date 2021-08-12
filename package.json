@@ -2,7 +2,8 @@
   "name": "puppeteerlib",
   "version": "1.0.0",
   "description": "lib to scrape web pages",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "source":["src/index.js"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +20,8 @@
   "homepage": "https://github.com/elzurdo87/puppeteerLib#readme",
   "dependencies": {
     "puppeteerAlt-10": "npm:puppeteer@^10.2.0"
+  },
+  "devDependencies": {
+    "microbundle": "^0.13.3"
   }
 }
