@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/elzurdo87/puppeteerLib/issues"
   },
-  "homepage": "https://github.com/elzurdo87/puppeteerLib#readme"
+  "homepage": "https://github.com/elzurdo87/puppeteerLib#readme",
+  "dependencies": {
+    "puppeteerAlt-10": "npm:puppeteer@^10.2.0"
+  }
 }
