@@ -1,0 +1,20 @@
+{
+  "name": "puppeteerlib",
+  "version": "1.0.0",
+  "description": "lib to scrape web pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elzurdo87/puppeteerLib.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elzurdo87/puppeteerLib/issues"
+  },
+  "homepage": "https://github.com/elzurdo87/puppeteerLib#readme"
+}
