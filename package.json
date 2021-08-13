@@ -1,6 +1,6 @@
 {
   "name": "puppeteerlib",
-  "version": "1.0.02",
+  "version": "1.0.03",
   "description": "lib to scrape web pages",
   "source":"index.js",
   "scripts": {
