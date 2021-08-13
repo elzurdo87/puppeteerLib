@@ -851,4 +851,4 @@ const scraper = {
     }
 }
 
-module.exports = scraper;
+module.exports.scraper = scraper;
