@@ -1,9 +1,8 @@
 {
   "name": "puppeteerlib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "lib to scrape web pages",
-  "main": "dist/index.js",
-  "source":["src/index.js"],
+  "source":"index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
