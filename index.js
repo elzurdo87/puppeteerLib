@@ -6,8 +6,8 @@ const scraper = require ('./puppeterLibV2');
 }*/
 
 module.exports = {
-    scraperRun: async(recipe,param,options)=>{
-        console.log("scraper", scraper);
+    run: async(recipe,param,options)=>{
+        // console.log("scraper", scraper);
         let res = await scraper.run(recipe,param,options);
         return res;
     }
