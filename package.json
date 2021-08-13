@@ -5,7 +5,7 @@
   "source":"index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "npx publish"
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
