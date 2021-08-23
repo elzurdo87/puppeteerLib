@@ -27,7 +27,7 @@ const scraper = {
         this.options =options;
         this.params = param;
 
-        if(this.options.hasOwnProperty("preRun")){
+        if(this.options.hasOwnProperty("preRun") && this.options.preRun != null) {
             steps = [...steps, ...this.options.preRun];
         }
 
