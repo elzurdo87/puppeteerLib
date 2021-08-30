@@ -1,8 +1,7 @@
-const puppeteerNew = require('puppeteerAlt-10');
+const puppeteerNew = require('puppeteer-new');
 const util = require('util')
 /****
- * VERSION 2.0.8;
- * 
+ * VERSION 2.0.9;
  */
 const scraper = {
     params: [],
@@ -27,9 +26,12 @@ const scraper = {
         this.options =options;
         this.params = param;
 
-        if(this.options.hasOwnProperty("preRun") && this.options.preRun != null) {
-            steps = [...steps, ...this.options.preRun];
+
+        if(this.options.hasOwnProperty("preRun") && this.options.preRun != null){
+            let preRun = JSON.parse(this.options.preRun);
+            steps = [...steps, ...preRun];
         }
+        // console.log("STEPS:",steps);return [];
 
         //validar Receta
         
@@ -47,14 +49,16 @@ const scraper = {
     
         //segun tipo / convertir
         if(recipeTest["startUrl"]){
-            // console.log("hay");
+            console.log("hay");
             recipeTest = await this.webScraperToPuppeteer(recipeTest);                        
         }else{
             recipeTest = recipeTest.steps;
         }
+
         steps  = [...steps, ...recipeTest];
         //  console.log(util.inspect({"sp":steps}, false, null, true /* enable colors */));
         //  return [];
+
         //  console.log("recipeTest:", steps);
         //  return;
         // iniciar browser 
@@ -279,7 +283,7 @@ const scraper = {
                 if(purl.search(/\$TERM/) >0){
                     purl = purl.replace(key, term);
                 }
-            }else if(url == "$TERM"){
+            }else if(purl == "$TERM"){
                 key = "$TERM";
                 let term = await this.getValueParam("term");                    
                 url = term;
@@ -300,9 +304,14 @@ const scraper = {
         let steps_length = steps.length;
         let items=[];
         let url_scraped=[];
+
+        // console.log("LOS STEPS ;",steps);
+        // console.log("LOS STEPS ; LENGTH",steps.length);
         for (let i = 0; i < steps_length; i++) {
             // console.log("i:", i);
             let step = steps[i];
+            // console.log("STEP IN:",step.fn);
+
             let value;
             if (step["final"] && step.final) {
                 console.log("is Final");
@@ -338,6 +347,7 @@ const scraper = {
     async getValueParam(param) {
         if(!this.params[param]){
             console.log("param not found");
+            return false;
         }
         return this.params[param];
     },
@@ -494,21 +504,28 @@ const scraper = {
                 switch (step.type) {
                     case "text":
                         selector = step.field;
-
+                        let click = true;
                         if (step["choice"]) {
                             let choice = step.choice;
-                            val = await this.getValueParam(step.value)
-                            switch (choice.type) {
-                                case "number":
-                                    selector = step.field + ":nth-child(" + val + ")";
-                                    break;
-                                case "text":
-                                    key = step.key;
-                                    selector = step.field.replace(key,val);
-                                    break;
+                            val = await this.getValueParam(step.value);
+                            if(val){
+                                switch (choice.type) {
+                                    case "number":
+                                        selector = step.field + ":nth-child(" + val + ")";
+                                        break;
+                                    case "text":
+                                        key = step.key;
+                                        selector = step.field.replace(key,val);
+                                        break;
+                                }
+                            }else{
+                                click = false;
                             }
                         }
-                        await page.click(selector);
+                        if(click){
+                            await page.click(selector);
+                        }
+
                         break;
                     case "button":
                         selector = step.field;
